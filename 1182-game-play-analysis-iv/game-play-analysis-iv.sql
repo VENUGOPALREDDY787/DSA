@@ -1,24 +1,7 @@
 # Write your MySQL query statement below
-WITH FirstLogin AS (
-    SELECT
-        player_id,
-        MIN(event_date) AS first_login
-    FROM Activity
-    GROUP BY player_id
-),
-ConsecutiveLogin AS (
-    SELECT
-        a.player_id
-    FROM Activity a
-    JOIN FirstLogin fl
-    ON a.player_id = fl.player_id
-    AND a.event_date = DATE_ADD(fl.first_login, INTERVAL 1 DAY)
-)
-SELECT
-    ROUND(
-        COUNT(DISTINCT cl.player_id) * 1.0 / COUNT(DISTINCT fl.player_id),
-        2
-    ) AS fraction
-FROM FirstLogin fl
-LEFT JOIN ConsecutiveLogin cl
-ON fl.player_id = cl.player_id;
+with sales as (select player_id, event_date, 
+first_value(event_date) over(partition by player_id ORDER BY event_date)  as pre_day
+ from Activity)
+
+select round(count(case when DATEDIFF(event_date, pre_day) = 1 then player_id  end)/count(distinct(player_id)),2) as fraction  
+from sales 
