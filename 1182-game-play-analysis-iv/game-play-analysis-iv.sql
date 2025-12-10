@@ -1,7 +1,12 @@
 # Write your MySQL query statement below
-with sales as (select player_id, event_date, 
-first_value(event_date) over(partition by player_id ORDER BY event_date)  as pre_day
- from Activity)
-
-select round(count(case when DATEDIFF(event_date, pre_day) = 1 then player_id  end)/count(distinct(player_id)),2) as fraction  
-from sales 
+SELECT ROUND(
+    COUNT(*) / (SELECT COUNT(DISTINCT player_id) FROM Activity), 
+    2
+) fraction
+FROM Activity a
+JOIN (
+    SELECT player_id, MIN(event_date) d 
+    FROM Activity GROUP BY player_id
+) x 
+ON a.player_id = x.player_id 
+AND a.event_date = x.d + INTERVAL 1 DAY;
