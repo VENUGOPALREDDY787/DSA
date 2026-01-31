@@ -13,33 +13,21 @@ class Solution {
     ListNode head = new ListNode();
     ListNode dummy = head;
     int carry =0;
-    while(l1!=null && l2!=null){ 
-        int num = l1.val +l2.val+carry;
+    while(l1!=null || l2!=null ||carry!=0 ){ 
+        int num = carry;
+        if(l1 !=null){
+            num+=l1.val;
+             l1= l1.next;
+        }
+        if(l2 != null){
+            num+=l2.val;
+            l2= l2.next; 
+        }
         dummy.next = new ListNode((num)%10);
-        l1= l1.next;
-        l2= l2.next; 
         dummy = dummy.next;  
         carry=num/10;
     }
-    while(l1!=null){
-        int num = l1.val +carry;
-        dummy.next = new ListNode(num%10 );
-        dummy= dummy.next;
-        l1= l1.next;
-        carry= num/10;
-    }
-    while(l2!=null){
-           int num = l2.val +carry;
-        dummy.next = new ListNode(num%10);
-        dummy= dummy.next;
-        l2= l2.next;
-        carry = num/10;
-    }
-    while(carry!=0){
-        dummy.next = new ListNode(carry%10);
-        carry=carry/10;
-        dummy= dummy.next;
-    }
+   
     
     return head.next;
     }
