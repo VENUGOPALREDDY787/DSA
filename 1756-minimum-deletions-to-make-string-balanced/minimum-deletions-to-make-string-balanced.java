@@ -1,15 +1,15 @@
 class Solution {
     public int minimumDeletions(String s) {
-        Stack<Character>S = new Stack<>();
-        int count = 0;
-       for(int i =0;i<s.length();i++){
-            if(!S.isEmpty() && S.peek()=='b' && s.charAt(i)=='a'){
-                S.pop();
-                count++;
-            }else{
-                S.push(s.charAt(i));
+        int countofb =0;
+        int numberofdeletions = 0;
+        for(int i =0;i<s.length();i++){
+            if(s.charAt(i)=='b'){
+                countofb++;
+            }else if(countofb>0){
+                numberofdeletions++;
+                countofb--;
             }
-       }
-       return count; 
+        }
+        return numberofdeletions;
     }
 }
