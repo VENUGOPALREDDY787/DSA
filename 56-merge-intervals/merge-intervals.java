@@ -13,6 +13,6 @@ class Solution {
             }
         }
         arrlist.add(prev);
-        return arrlist.toArray(new int [arrlist.size()][]);
+        return arrlist.toArray(new int [0][]);
     }
 }
