@@ -19,16 +19,23 @@ class Solution {
             } 
             return;
         }
-        if(curr == 'a'){
-            getthekthString(n,k,'b',str);
-            getthekthString(n,k,'c',str);
-        }else if(curr =='b'){
-            getthekthString(n,k,'a',str);
-            getthekthString(n,k,'c',str); 
-        }else{
-             getthekthString(n,k,'a',str);
-              getthekthString(n,k,'b',str);
+        char[] values ={'a','b','c'};
+        for(char ch : values){
+            if(ch == curr){
+                continue;
+            }
+             getthekthString(n,k,ch,str);
         }
+        // if(curr == 'a'){
+        //     getthekthString(n,k,'b',str);
+        //     getthekthString(n,k,'c',str);
+        // }else if(curr =='b'){
+        //     getthekthString(n,k,'a',str);
+        //     getthekthString(n,k,'c',str); 
+        // }else{
+        //      getthekthString(n,k,'a',str);
+        //       getthekthString(n,k,'b',str);
+        // }
         
     }
 }
