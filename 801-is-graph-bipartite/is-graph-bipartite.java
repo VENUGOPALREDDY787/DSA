@@ -1,49 +1,29 @@
-import java.util.*;
-
 class Solution {
     public boolean isBipartite(int[][] graph) {
         HashSet<Integer> left = new HashSet<>();
         HashSet<Integer> right = new HashSet<>();
-        boolean[] visited = new boolean[graph.length];
-
-        for (int i = 0; i < graph.length; i++) {
-            if (!visited[i]) {
-                left.add(i); // start node in left
-                if (!dfs(graph, i, left, right, visited)) {
-                    return false;
-                }
+        boolean[] visted = new boolean[graph.length];
+        for(int i = 0; i< graph.length;i++){
+            if(!visted[i]){
+                if(!bfs(graph,visted,left,right,i))return false;
             }
         }
         return true;
     }
-
-    public boolean dfs(int[][] graph, int node,
-                       HashSet<Integer> left,
-                       HashSet<Integer> right,
-                       boolean[] visited) {
-
-        visited[node] = true;
-
-        for (int neighbor : graph[node]) {
-
-            // ❌ Conflict
-            if (left.contains(node) && left.contains(neighbor)) return false;
-            if (right.contains(node) && right.contains(neighbor)) return false;
-
-            // Assign to opposite set
-            if (left.contains(node)) {
-                if (!right.contains(neighbor)) {
-                    right.add(neighbor);
-                }
-            } else {
-                if (!left.contains(neighbor)) {
-                    left.add(neighbor);
-                }
+    public static boolean bfs(int[][] graph, boolean[] visted,HashSet<Integer> left ,HashSet<Integer> right, int node){
+        visted[node] = true;
+        for(int i = 0;i<graph[node].length;i++){
+            int nib = graph[node][i];
+            if(left.contains(node)&& left.contains(nib))return false;
+            if(right.contains(node)&& right.contains(nib))return false;
+            if(left.contains(node)){
+                    right.add(nib);
+                
+            }else{
+                left.add(nib);
             }
-
-            // DFS call
-            if (!visited[neighbor]) {
-                if (!dfs(graph, neighbor, left, right, visited)) {
+            if(!visted[nib]){
+                 if (!bfs(graph, visted, left, right, nib)) {
                     return false;
                 }
             }
