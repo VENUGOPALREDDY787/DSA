@@ -26,7 +26,7 @@ class Solution {
         }
 
         // 3. Convert digits
-        while (i < n && Character.isDigit(s.charAt(i))) {
+        while (i < n && isDigit(s.charAt(i))) {
 
             num = num * 10 + (s.charAt(i) - '0');
 
@@ -42,7 +42,13 @@ class Solution {
             i++;
         }
 
-        // 5. Return final answer
+        
         return (int)(sign * num);
+    } 
+    public boolean isDigit(char ch){
+        if(ch<='9'&& ch>='0')return true;
+        else{
+            return false;
+        }
     }
 }
