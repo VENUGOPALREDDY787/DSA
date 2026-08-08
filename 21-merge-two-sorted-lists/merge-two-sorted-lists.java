@@ -10,23 +10,36 @@
  */
 class Solution {
     public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
-        ListNode dummy = new ListNode(-1);
-        ListNode tail = dummy;
-
-        while (list1 != null && list2 != null) {
-            if (list1.val < list2.val) {
-                tail.next = list1;
+        if(list1 == null)return list2;
+        if(list2 == null)return list1;
+        ListNode ans = null;
+        if(list1.val<=list2.val){
+        ans = list1;
+        while(list1!= null && list2!= null){
+            ListNode temp = list1;
+            while(list1!=null && list1.val<=list2.val){
+                temp = list1;
                 list1 = list1.next;
-            } else {
-                tail.next = list2;
+            }
+            temp.next = list2;
+            ListNode t = list1;
+            list1 = list2;
+            list2 = t;
+        }
+        }else{
+            ans = list2;
+            while(list2!= null && list1!= null){
+            ListNode temp = list2;
+            while(list2!=null && list2.val<=list1.val){
+                temp = list2;
                 list2 = list2.next;
             }
-            tail = tail.next;
+            temp.next = list1;
+            ListNode t = list2;
+            list2 = list1;
+            list1 = t;
+        } 
         }
-
-        // Attach remaining nodes
-        tail.next = (list1 != null) ? list1 : list2;
-
-        return dummy.next; // correct head of merged list
+        return ans;
     }
 }
