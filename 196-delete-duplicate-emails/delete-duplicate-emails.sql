@@ -1,12 +1,3 @@
 # Write your MySQL query statement below
-WITH DuplicateEmails AS (
-    SELECT 
-        id,
-        ROW_NUMBER() OVER (PARTITION BY email ORDER BY id) AS rn
-    FROM 
-        Person
-)
-DELETE FROM Person
-WHERE id IN (
-    SELECT id FROM DuplicateEmails WHERE rn > 1
-);
+delete p1 from person p1,person p2 
+where p1.email=p2.email and p1.id>p2.id;
