@@ -1,4 +1,4 @@
-<h2><a href="https://leetcode.com/problems/majority-element-ii">Majority Element II</a></h2> <img src='https://img.shields.io/badge/Difficulty-Medium-orange' alt='Difficulty: Medium' /><hr><p>Given an integer array of size <code>n</code>, find all elements that appear more than <code>&lfloor; n/3 &rfloor;</code> times.</p>
+<h2><a href="https://leetcode.com/problems/majority-element-ii">Majority Element II</a></h2> <img src='https://img.shields.io/badge/Difficulty-Medium-orange' alt='Difficulty: Medium' /><hr><p>Given an integer array of size <code>n</code>, find all elements that appear more than <code>&lfloor;n / 3&rfloor;</code> times.</p>
 
 <p>&nbsp;</p>
 <p><strong class="example">Example 1:</strong></p>
